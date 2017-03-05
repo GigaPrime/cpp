@@ -1,0 +1,8 @@
+Debug
+ConsoleApplication*
+*.lnk
+*.txt
+*.db
+*.filters
+*.suo
+*.opendb
