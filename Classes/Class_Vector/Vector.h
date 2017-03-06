@@ -5,7 +5,7 @@ template <typename V>
 class Vector 
 {
 private:
-	const int DEFAULT_CAPACITY;
+	static const int DEFAULT_CAPACITY = 10;
 	V internalArray[];
 	int capacity;
 	int size;
