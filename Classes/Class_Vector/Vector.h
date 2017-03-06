@@ -9,7 +9,12 @@ private:
 	V internalArray[];
 	int capacity;
 	int size;
+
 public:
+	Vector();
+	Vector(int);
+	Vector(Vector&);
+	~Vector();
 };
 
 #endif // !__VECTOR_H__
