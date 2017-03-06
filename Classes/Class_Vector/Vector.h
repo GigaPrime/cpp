@@ -1,16 +1,15 @@
 #ifndef __VECTOR_H__
 #define __VECTOR_H__
 
-class Vector
+template <typename V>
+class Vector 
 {
 private:
-	int vectorArray[];
-	unsigned int size;
-
-
+	const int DEFAULT_CAPACITY;
+	V internalArray[];
+	int capacity;
+	int size;
 public:
-	
-
 };
 
 #endif // !__VECTOR_H__
