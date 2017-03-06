@@ -3,10 +3,13 @@
 
 class Vector
 {
+private:
+	int vectorArray[];
+	unsigned int size;
+
+
 public:
 	
-
-private:
 
 };
 
