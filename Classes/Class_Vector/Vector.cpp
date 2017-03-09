@@ -6,31 +6,31 @@ using namespace std;
 template <typename V>
 Vector<V>::Vector()
 {
-	V internalArray[DEFAULT_CAPACITY];
+	V* internalArray = new V[DEFAULT_CAPACITY];
 	size = 0;
 }
 
 template <typename V>
 Vector<V>::Vector(int cap)
 {
+	V* internalArray = new V[10];
 	capacity = (cap > 0) ? cap : DEFAULT_CAPACITY;
-	internalArray[capacity];
 	size = 0;
 }
 
 template <typename V>
 Vector<V>::Vector(Vector& vector)
 {
-	capacity = vector.capacity;
-	internalArray[capacity];
+	V* internalArray = new V[10];
+	capacity = vector.size;
 	for (int i = 0; i < vector.capacity; i++)
 	{
-		internalArray[i] = vector[i];
+		internalArray[i] = vector.internalArray[i];
 	}
 }
 
 template <typename V>
 Vector<V>::~Vector()
 {
-	delete[] internalArray;
+	delete[] ;
 }

@@ -15,6 +15,7 @@ public:
 	Vector(int);
 	Vector(Vector&);
 	~Vector();
+
 };
 
 #endif // !__VECTOR_H__
