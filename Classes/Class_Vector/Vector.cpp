@@ -1,4 +1,3 @@
-#include <iostream>
 #include "Vector.h"
 
 using namespace std;
@@ -6,24 +5,26 @@ using namespace std;
 template <typename V>
 Vector<V>::Vector()
 {
-	V* internalArray = new V[DEFAULT_CAPACITY];
+	capacity = DEFAULT_CAPACITY;
+	internalArray = new V[capacity];
 	size = 0;
 }
 
 template <typename V>
 Vector<V>::Vector(int cap)
 {
-	V* internalArray = new V[10];
-	capacity = (cap > 0) ? cap : DEFAULT_CAPACITY;
+	capacity = cap;
+	internalArray = new V[capacity];
 	size = 0;
 }
 
 template <typename V>
-Vector<V>::Vector(Vector& vector)
+Vector<V>::Vector(Vector<V>& vector)
 {
-	V* internalArray = new V[10];
-	capacity = vector.size;
-	for (int i = 0; i < vector.capacity; i++)
+	capacity = vector.capacity;
+	internalArray = new V[capacity];
+	size = vector.size;
+	for (int i = 0; i < vector.size; i++)
 	{
 		internalArray[i] = vector.internalArray[i];
 	}
@@ -32,5 +33,5 @@ Vector<V>::Vector(Vector& vector)
 template <typename V>
 Vector<V>::~Vector()
 {
-	delete[] ;
+	delete[] internalArray;
 }

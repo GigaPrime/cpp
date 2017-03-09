@@ -2,18 +2,19 @@
 #define __VECTOR_H__
 
 template <typename V>
-class Vector 
+class Vector
 {
 private:
 	static const int DEFAULT_CAPACITY = 10;
-	V internalArray[];
+
+	V* internalArray;
 	int capacity;
 	int size;
 
 public:
 	Vector();
 	Vector(int);
-	Vector(Vector&);
+	Vector(Vector<V>&);
 	~Vector();
 
 };
