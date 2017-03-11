@@ -3,6 +3,19 @@
 using namespace std;
 
 template <typename V>
+void Vector<V>::autoextend()
+{
+	capacity *= 2;
+	V* tmpArray = new V[capacity];
+	for (int i = 0; i < size; i++)
+	{
+		tmpArray[i] = internalArray[i];
+	}
+	delete[] internalArray;
+	internalArray = tmpArray;
+}
+
+template <typename V>
 Vector<V>::Vector()
 {
 	capacity = DEFAULT_CAPACITY;
@@ -34,4 +47,36 @@ template <typename V>
 Vector<V>::~Vector()
 {
 	delete[] internalArray;
+}
+
+template <typename V>
+void Vector<V>::add(V newArrayElement)
+{
+	if (size == capacity)
+		autoextend();
+	internalArray[size++] = newArrayElement;
+}
+
+template <typename V>
+V Vector<V>::get(int index)
+{
+	if (index < 0 || index > size)
+		throw runtime_error("IndexOutOfRangeEcxeption");
+	return internalArray[index];
+}
+
+template <typename V>
+V Vector<V>::operator[](int index)
+{
+	if (index < 0 || index > size)
+		throw runtime_error("IndexOutOfRangeEcxeption");
+	return internalArray[index];
+}
+
+template <typename V>
+void Vector<V>::set(int index, V newArrayElement)
+{
+	if (index < 0 || index => size)
+		throw runtime_error("IndexOutOfRangeEcxeption");
+	internalArray[index] = newArrayElement;
 }

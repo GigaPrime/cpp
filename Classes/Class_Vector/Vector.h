@@ -11,12 +11,18 @@ private:
 	int capacity;
 	int size;
 
+	void autoextend();
+
 public:
 	Vector();
 	Vector(int);
 	Vector(Vector<V>&);
 	~Vector();
 
+	void add(V);
+	V get(int);
+	V operator[](int);
+	void set(int, V);
 };
 
 #endif // !__VECTOR_H__
