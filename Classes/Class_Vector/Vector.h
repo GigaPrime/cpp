@@ -12,6 +12,7 @@ private:
 	int size;
 
 	void autoextend();
+	void autocompress();
 
 public:
 	Vector();
@@ -20,9 +21,16 @@ public:
 	~Vector();
 
 	void add(V);
+	V remove(int);
 	V get(int);
 	V operator[](int);
 	void set(int, V);
+	void compress();
+	int getSize();
+	V subvector(int);
+	V subvector(int, int);
+	void printVector();
+	void indexOutOfRangeException(int);
 };
 
 #endif // !__VECTOR_H__
@@ -44,4 +52,6 @@ public:
 		- autocompress (private);
 		- remove;
 		- subvector, 2 overloading (from/to exact, from the very beginning to exact index);
+		- show vecor;
+		- out of index range exception.
 */

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Vector.h"
 
 using namespace std;
@@ -6,6 +7,19 @@ template <typename V>
 void Vector<V>::autoextend()
 {
 	capacity *= 2;
+	V* tmpArray = new V[capacity];
+	for (int i = 0; i < size; i++)
+	{
+		tmpArray[i] = internalArray[i];
+	}
+	delete[] internalArray;
+	internalArray = tmpArray;
+}
+
+template <typename V>
+void Vector<V>::autocompress()
+{
+	capacity /= 2;
 	V* tmpArray = new V[capacity];
 	for (int i = 0; i < size; i++)
 	{
@@ -58,25 +72,105 @@ void Vector<V>::add(V newArrayElement)
 }
 
 template <typename V>
+V Vector<V>::remove(int index)
+{
+	indexOutOfRangeException(index);
+
+	for (int i = index; i < size; i++)
+	{
+		internalArray[i] = internalArray[i + 1];
+	}
+	if (size * 2 < capacity)
+		autocompress();
+	return internalArray;
+}
+
+template <typename V>
 V Vector<V>::get(int index)
 {
-	if (index < 0 || index > size)
-		throw runtime_error("IndexOutOfRangeEcxeption");
+	indexOutOfRangeException(index);
 	return internalArray[index];
 }
 
 template <typename V>
 V Vector<V>::operator[](int index)
 {
-	if (index < 0 || index > size)
-		throw runtime_error("IndexOutOfRangeEcxeption");
+	indexOutOfRangeException(index);
 	return internalArray[index];
 }
 
 template <typename V>
 void Vector<V>::set(int index, V newArrayElement)
 {
-	if (index < 0 || index => size)
-		throw runtime_error("IndexOutOfRangeEcxeption");
+	indexOutOfRangeException(index);
+
 	internalArray[index] = newArrayElement;
+}
+
+template <typename V>
+void Vector<V>::compress()
+{
+	V* tmpArray = new V[size];
+	for (int i = 0; i < size; i++)
+	{
+		tmpArray[i] = internalArray[i];
+	}
+	delete[] internalArray;
+	internalArray = tmpArray;
+}
+
+template <typename V>
+int Vector<V>::getSize()
+{
+	return size;
+}
+
+template <typename V>
+V Vector<V>::subvector(int endIndex)
+{
+	indexOutOfRangeException(endIndex);
+
+	V* subArray = new V[size];
+
+	for (int i = 0; i < endIndex; i++)
+	{
+		subArray[i] = internalArray[i];
+		cout << subArray[i] << " ";
+	}
+	return *subArray;
+}
+
+template <typename V>
+V Vector<V>::subvector(int startIndex, int endIndex)
+{
+	indexOutOfRangeException(startIndex);
+	indexOutOfRangeException(endIndex);
+
+	V* subArray = new V[size];
+	int subArrayIndex = 0;
+
+	for (int i = startIndex; i < endIndex; i++)
+	{
+		subArray[subArrayIndex] = internalArray[i];
+		cout << subArray[subArrayIndex] << " ";
+		subArrayIndex++;
+	}
+	return *subArray;
+}
+
+template <typename V>
+void Vector<V>::printVector()
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << "[ " << internalArray[i] << " ] ";
+	}
+	cout << "vector size is: " << getSize() << endl;
+}
+
+template <typename V>
+void Vector<V>::indexOutOfRangeException(int index)
+{
+	if (index < 0 || index >= size)
+		throw runtime_error("IndexOutOfRangeEcxeption");
 }
