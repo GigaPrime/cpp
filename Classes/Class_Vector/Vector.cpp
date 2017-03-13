@@ -72,37 +72,37 @@ void Vector<V>::add(V newArrayElement)
 }
 
 template <typename V>
-V Vector<V>::remove(int index)
+void Vector<V>::remove(int index)
 {
-	indexOutOfRangeException(index);
+	validateIndex(index);
 
-	for (int i = index; i < size; i++)
+	for (int i = index; i < size - 1; i++)
 	{
 		internalArray[i] = internalArray[i + 1];
 	}
+	size--;
 	if (size * 2 < capacity)
 		autocompress();
-	return internalArray;
 }
 
 template <typename V>
 V Vector<V>::get(int index)
 {
-	indexOutOfRangeException(index);
+	validateIndex(index);
 	return internalArray[index];
 }
 
 template <typename V>
 V Vector<V>::operator[](int index)
 {
-	indexOutOfRangeException(index);
+	validateIndex(index);
 	return internalArray[index];
 }
 
 template <typename V>
 void Vector<V>::set(int index, V newArrayElement)
 {
-	indexOutOfRangeException(index);
+	validateIndex(index);
 
 	internalArray[index] = newArrayElement;
 }
@@ -126,50 +126,28 @@ int Vector<V>::getSize()
 }
 
 template <typename V>
-V Vector<V>::subvector(int endIndex)
+Vector<V> Vector<V>::subvector(int endIndex)
 {
-	indexOutOfRangeException(endIndex);
-
-	V* subArray = new V[size];
-
-	for (int i = 0; i < endIndex; i++)
-	{
-		subArray[i] = internalArray[i];
-		cout << subArray[i] << " ";
-	}
-	return *subArray;
+	return subvector(0, endIndex);
 }
 
 template <typename V>
-V Vector<V>::subvector(int startIndex, int endIndex)
+Vector<V> Vector<V>::subvector(int startIndex, int endIndex)
 {
-	indexOutOfRangeException(startIndex);
-	indexOutOfRangeException(endIndex);
+	validateIndex(startIndex);
+	validateIndex(endIndex);
 
-	V* subArray = new V[size];
-	int subArrayIndex = 0;
+	Vector<V> subVector(endIndex - startIndex);
 
 	for (int i = startIndex; i < endIndex; i++)
 	{
-		subArray[subArrayIndex] = internalArray[i];
-		cout << subArray[subArrayIndex] << " ";
-		subArrayIndex++;
+		subVector.add(internalArray[i]);
 	}
-	return *subArray;
+	return subVector;
 }
 
 template <typename V>
-void Vector<V>::printVector()
-{
-	for (int i = 0; i < size; i++)
-	{
-		cout << "[ " << internalArray[i] << " ] ";
-	}
-	cout << "vector size is: " << getSize() << endl;
-}
-
-template <typename V>
-void Vector<V>::indexOutOfRangeException(int index)
+void Vector<V>::validateIndex(int index)
 {
 	if (index < 0 || index >= size)
 		throw runtime_error("IndexOutOfRangeEcxeption");

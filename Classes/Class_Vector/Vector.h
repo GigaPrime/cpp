@@ -21,16 +21,15 @@ public:
 	~Vector();
 
 	void add(V);
-	V remove(int);
+	void remove(int);
 	V get(int);
 	V operator[](int);
 	void set(int, V);
 	void compress();
 	int getSize();
-	V subvector(int);
-	V subvector(int, int);
-	void printVector();
-	void indexOutOfRangeException(int);
+	Vector<V> subvector(int);
+	Vector<V> subvector(int, int);
+	void validateIndex(int);
 };
 
 #endif // !__VECTOR_H__
